@@ -417,13 +417,31 @@ print(f"Total Final Points : {len(final_points)}")
 print("\n========================================\n")
 
 # ==========================================
-# VISUALIZATION
+# ==========================================
+# SAVE OUTPUT FILES
 # ==========================================
 
-o3d.visualization.draw_geometries(
-
-    [pcd],
-
-    window_name="Physics-Based 3D LiDAR Digital Twin"
-
+o3d.io.write_point_cloud(
+    "final_complete_lidar_scan.pcd",
+    pcd
 )
+
+print("Point cloud saved successfully")
+
+try:
+    o3d.io.write_point_cloud(
+        "slam_ready_map.pcd",
+        slam_downsampled
+    )
+except:
+    pass
+
+try:
+    o3d.io.write_point_cloud(
+        "surface_fitted_cloud.pcd",
+        pcd
+    )
+except:
+    pass
+
+print("Simulation completed successfully")
